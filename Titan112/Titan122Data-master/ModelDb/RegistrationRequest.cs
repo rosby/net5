@@ -50,5 +50,15 @@ namespace Titan112Data
             List<NsgDataItem> list = db.RegistrationRequests.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(User.ToString()) & string.IsNullOrEmpty(Date.ToString()))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(Date.ToString()))
+                return User.ToString();
+            else
+                return $"{User} ({Date})";
+        }
     }
 }

@@ -51,5 +51,13 @@ namespace Titan112Data
             List<NsgDataItem> list = db.UserTokens.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Token))
+                return Id.ToString();
+            else
+                return Token;
+        }
     }
 }

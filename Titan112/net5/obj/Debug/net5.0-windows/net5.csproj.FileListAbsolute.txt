@@ -145,3 +145,5 @@ D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\net5.dll
 D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\ref\net5.dll
 D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\net5.pdb
 D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\net5.genruntimeconfig.cache
+D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\net5.ФормаРедактирования.resources
+D:\NSG\projects\Titan112\net5\obj\Debug\net5.0-windows\net5.ФормаРедактированияСсылочногоЗнач.resources

@@ -23,6 +23,14 @@ namespace Titan112Data
             List<NsgDataItem> list = db.PaymentRequests.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(RequestId))
+                return Id.ToString();
+            else
+                return RequestId;
+        }
     }
 }
 

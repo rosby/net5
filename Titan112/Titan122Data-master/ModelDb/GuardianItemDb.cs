@@ -50,5 +50,12 @@ namespace Titan112Data
             return list;
         }
 
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(FirstName + SecondName + LastName))
+                return Id.ToString();
+            else
+                return FirstName + " " + SecondName + " " + LastName;
+        }
     }
 }

@@ -12,10 +12,5 @@ namespace Titan112Data
         public int Guid { get; set; }
         public virtual AlarmItemDb Alarm { get; set; }
 
-        public override List<NsgDataItem> GetDBObjects(TitanDBContext db)
-        {
-            List<NsgDataItem> list = db.Alarms.ToList<NsgDataItem>();
-            return list;
-        }
     }
 }

@@ -106,5 +106,15 @@ namespace Titan112Data
             List<NsgDataItem> list = db.Alarms.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(User.ToString()) & string.IsNullOrEmpty(BeginAlarmTime.ToString()))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(User.ToString()))
+                return BeginAlarmTime.ToString();
+            else
+                return $"{User} ({BeginAlarmTime})";
+        }
     }
 }

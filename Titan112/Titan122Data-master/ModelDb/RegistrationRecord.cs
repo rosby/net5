@@ -24,5 +24,13 @@ namespace Titan112Data
             List<NsgDataItem> list = db.RegistrationJournal.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Sum.ToString()))
+                return Id.ToString();
+            else 
+                return Sum.ToString();
+        }
     }
 }

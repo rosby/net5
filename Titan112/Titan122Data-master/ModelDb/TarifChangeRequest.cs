@@ -35,6 +35,14 @@ namespace Titan112Data
             List<NsgDataItem> list = db.TarifChangeRequests.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Tarif.ToString()) & string.IsNullOrEmpty(TarifPack.ToString()) & string.IsNullOrEmpty(User.ToString()))
+                return Id.ToString();
+            else
+                return $"User:{User} | Tariff:{Tarif} | TariffPak:{TarifPack}";
+        }
     }
 
 }

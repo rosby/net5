@@ -509,5 +509,14 @@ namespace Titan112Data
             List<NsgDataItem> list = db.Tarifs.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Name.ToString()))
+                return Id.ToString();
+            else
+                return Name.ToString();
+        }
     }
 }
+

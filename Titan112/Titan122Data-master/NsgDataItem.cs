@@ -9,12 +9,16 @@ namespace Titan112Data
 {
     public class NsgDataItem
     {
-        [NotMapped]
-        public string UserDescriptor { get; set; }
+        
 
         public virtual List<NsgDataItem> GetDBObjects(TitanDBContext db)
         {
             throw new Exception();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

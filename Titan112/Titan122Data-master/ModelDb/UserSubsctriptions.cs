@@ -65,6 +65,15 @@ namespace Titan112Data
             List<NsgDataItem> list = db.UserSubsctriptions.ToList<NsgDataItem>();
             return list;
         }
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Tarif.ToString()) & string.IsNullOrEmpty(PaymentDoc.ToString()))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(PaymentDoc.ToString()))
+                return Tarif.ToString();
+            else
+                return $"{Tarif} ({PaymentDoc})";
+        }
     }
 
 }

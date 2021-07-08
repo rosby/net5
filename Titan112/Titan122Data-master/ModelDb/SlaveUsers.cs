@@ -19,5 +19,13 @@ namespace Titan112Data
             List<NsgDataItem> list = db.SlaveUsers.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Slave.ToString()))
+                return Id.ToString();
+            else
+                return Slave.ToString();
+        }
     }
 }

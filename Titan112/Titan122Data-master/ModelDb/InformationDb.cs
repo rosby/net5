@@ -44,5 +44,13 @@ namespace Titan112Data
             List<NsgDataItem> list =db.Information.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Text))
+                return Id.ToString();
+            else
+                return Text;
+        }
     }
 }

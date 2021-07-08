@@ -125,6 +125,16 @@ namespace Titan112Data
             List<NsgDataItem> list = db.PaymentDocs.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Comment) & string.IsNullOrEmpty(Sum.ToString()))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(Comment))
+                return Sum.ToString();
+            else
+                return Comment;
+        }
     }
 }
 

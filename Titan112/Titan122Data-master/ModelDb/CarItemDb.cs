@@ -16,11 +16,20 @@ namespace Titan112Data
         public String CarType { get; set; }
         [MaxLength(20)]
         public String Team { get; set; }
+        
 
         public override List<NsgDataItem> GetDBObjects(TitanDBContext db)
         {
             List<NsgDataItem> list = db.Cars.ToList<NsgDataItem>();
             return list;
+        }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Number))
+                return Id.ToString();
+            else
+                return Number;
         }
     }
 }

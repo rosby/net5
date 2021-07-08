@@ -15,184 +15,82 @@ namespace net5
 {
     public partial class ФормаСпискаПоля : Form
     {
-        private List<Type> объектыДляАдминистрирования;
-        private int текИндексСтроки;
+        private Type typeOfObject;
+        private TitanDBContext db;
+        private string nameOfObject;
+        private List<NsgDataItem> list;
+        private DataTable table = new DataTable();
 
-        public ФормаСпискаПоля(List<Type> объектыДляАдминистрирования, int текИндексСтроки)
+
+
+        public ФормаСпискаПоля( Type typeOfObject, string nameOfObject, TitanDBContext db)
         {
             InitializeComponent();
-            this.объектыДляАдминистрирования = объектыДляАдминистрирования;
-            this.текИндексСтроки = текИндексСтроки;
+            this.typeOfObject = typeOfObject;
+            this.nameOfObject = nameOfObject;
+            this.db = db;
+            this.Text = nameOfObject;
+            DataGridFill();
         }
 
-        private void ФормаСпискаПоля_Load(object sender, EventArgs e)
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var индексКолонки = 1;
-            List<NsgDataItem> list = new List<NsgDataItem>();
-            var списокПолей = объектыДляАдминистрирования[текИндексСтроки].GetProperties();
-            foreach (var field in списокПолей)
+            var nameOfField = dataGridView1.Columns[e.ColumnIndex].HeaderText;
+            var cell = table.Rows[e.RowIndex][e.ColumnIndex];
+            var typeOfCell = cell.GetType();
+            if (typeOfCell == typeof(DBNull)) typeOfCell = table.Columns[e.ColumnIndex].DataType;
+
+            if (typeOfCell.IsPrimitive | typeOfCell == typeof(string) | typeOfCell == typeof(bool) | typeOfCell == typeof(DateTime))
             {
-                dataGridView1.Columns.Add($"{индексКолонки}",$"{field.Name}");
-                индексКолонки++;
+                var formEdit = new ФормаРедактирования(db, nameOfField, e.RowIndex, list[e.RowIndex], cell, typeOfCell);
+                formEdit.Owner = this;
+                formEdit.ShowDialog(this);
+            }
+            else if (!typeOfCell.IsValueType & typeOfCell != typeof(byte[])) 
+            {
+                var formEdit = new ФормаРедактированияСсылочногоЗнач(db, nameOfField, e.RowIndex, list[e.RowIndex], typeOfCell);
+                formEdit.Owner = this;
+                formEdit.ShowDialog(this);
             }
 
-            var db = new TitanDBContext();
-            var конструктор = объектыДляАдминистрирования[текИндексСтроки].GetConstructor(new Type[] { });
-            var ads = конструктор.Invoke(new Object[] { });
+        }
 
-            if (ads is ActualBalanceReg) 
+        public void DataGridFill() 
+        {
+            var properties = typeOfObject.GetProperties();
+
+            foreach (var field in properties)
             {
-                var actual = (ActualBalanceReg)ads;
-                list = actual.GetDBObjects(db);
+                table.Columns.Add($"{field.Name}", field.PropertyType);
             }
 
-            if (ads is AlarmCarsDb)
-            {
-                var actual = (AlarmCarsDb)ads;
-                list = actual.GetDBObjects(db);
-            }
+            var constructor = typeOfObject.GetConstructor(new Type[] { });
+            var ads = constructor.Invoke(new object[] { });
 
-            if (ads is AlarmInfoDb)
-            {
-                var actual = (AlarmInfoDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is AlarmItemDb)
-            {
-                var actual = (AlarmItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is AlarmCancelReasonDb)
-            {
-                var actual = (AlarmCancelReasonDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is AlarmItemDb)
-            {
-                var actual = (AlarmItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is CarItemDb)
-            {
-                var actual = (CarItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is Discount)
-            {
-                var actual = (Discount)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is GuardianItemDb)
-            {
-                var actual = (GuardianItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is ImageDb)
-            {
-                var actual = (ImageDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is ImageDocument)
-            {
-                var actual = (ImageDocument)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is InformationDb)
-            {
-                var actual = (InformationDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is PaymentDoc)
-            {
-                var actual = (PaymentDoc)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is PaymentRequest)
-            {
-                var actual = (PaymentRequest)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is RegistrationRecord)
-            {
-                var actual = (RegistrationRecord)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is RegistrationRequestDb)
-            {
-                var actual = (RegistrationRequestDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is SlaveUser)
-            {
-                var actual = (SlaveUser)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is TarifChangeRequestDb)
-            {
-                var actual = (TarifChangeRequestDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is TarifItemDb)
-            {
-                var actual = (TarifItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is TarifPackDb)
-            {
-                var actual = (TarifPackDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is UserItemDb)
-            {
-                var actual = (UserItemDb)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is UserSubsctription)
-            {
-                var actual = (UserSubsctription)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-            if (ads is UserTokens)
-            {
-                var actual = (UserTokens)ads;
-                list = actual.GetDBObjects(db);
-            }
-
-
+            list = (ads as NsgDataItem).GetDBObjects(db);
+;
             int indexRow = 0;
             int indexCell = 0;
-            foreach (var obj in list) 
+            foreach (var obj in list)
             {
-                dataGridView1.Rows.Add();
-                foreach (var field in списокПолей) 
+                
+                table.Rows.Add();
+                foreach (var field in properties)
                 {
-                    if(field.GetValue(obj) != null)
-                        dataGridView1.Rows[indexRow].Cells[indexCell].Value = field.GetValue(obj).ToString();
+                    if (field.GetValue(obj) != null)
+                        table.Rows[indexRow][indexCell] = field.GetValue(obj);
                     indexCell++;
                 }
                 indexCell = 0;
                 indexRow++;
             }
+
+            dataGridView1.DataSource = table;
+        }
+
+        public void UpdateCellInDataGrid<T>(int rowIndex, string nameOfColumn, T value)
+        {
+            table.Rows[rowIndex][nameOfColumn] = value;
         }
     }
 }

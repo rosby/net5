@@ -78,6 +78,13 @@ namespace Titan112Data
             return list;
         }
 
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Balance.ToString()))
+                return Id.ToString();
+            else
+                return Balance.ToString();
+        }
     }
 }
 

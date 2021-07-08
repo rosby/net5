@@ -35,6 +35,16 @@ namespace Titan112Data
             List<NsgDataItem> list = db.AlarmCars.ToList<NsgDataItem>();
             return list;
         }
-    
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Alarm.ToString()) & string.IsNullOrEmpty(Car.ToString()))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(Car.ToString()))
+                return Alarm.ToString();
+            else
+                return $"{Alarm} ({Car})";
+        }
+
     }
 }

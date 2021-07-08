@@ -22,7 +22,6 @@ namespace Titan112Data
             set
             {
                 phone = cleanPhoneNumber(value);
-
             }
         }
 
@@ -122,7 +121,20 @@ namespace Titan112Data
             List<NsgDataItem> list = db.Users.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(FirstName + SecondName + LastName) & string.IsNullOrEmpty(phone))
+                return Id.ToString();
+            else if (string.IsNullOrEmpty(FirstName + SecondName + LastName))
+                return phone;
+            else
+                return $"{FirstName} {SecondName} {LastName}";
+        }
+
     }
+
+
 
     public class UserRegistrationStatusEnum
     {

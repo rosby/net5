@@ -22,5 +22,10 @@ namespace Titan112Data
             List<NsgDataItem> list = db.ImageDocuments.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            return Id.ToString();
+        }
     }
 }

@@ -50,5 +50,13 @@ namespace Titan112Data
             List<NsgDataItem> list = db.AlarmCancelReasons.ToList<NsgDataItem>();
             return list;
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Description))
+                return Id.ToString();
+            else
+                return Description;
+        }
     }
 }
