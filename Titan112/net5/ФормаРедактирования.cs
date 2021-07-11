@@ -74,29 +74,29 @@ namespace net5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var OwnerOfThisForm = Owner as ФормаСпискаПоля;
+            var OwnerOfThisForm = Owner as ФормаОбъектаDB;
 
             if (typeOfCell == typeof(bool))
             {
-                var field = editObject.GetType().GetProperty(nameOfField);
-                field.SetValue(editObject, checkBox1.Checked);
-                db.SaveChanges();
-                OwnerOfThisForm.UpdateCellInDataGrid(rowIndex, nameOfField, checkBox1.Checked);
+                //var field = editObject.GetType().GetProperty(nameOfField);
+                //field.SetValue(editObject, checkBox1.Checked);
+                //db.SaveChanges();
+                OwnerOfThisForm.UpdateCellInDataGrid(nameOfField, checkBox1.Checked);
             }
             else if (typeOfCell == typeof(DateTime))
             {
                 var timeSpan = TimeSpan.Parse(dateTimePicker2.Value.ToString("HH:mm:ss"));
-                var field = editObject.GetType().GetProperty(nameOfField);
-                field.SetValue(editObject, dateTimePicker1.Value.Date + timeSpan);
-                db.SaveChanges();
-                OwnerOfThisForm.UpdateCellInDataGrid(rowIndex, nameOfField, dateTimePicker1.Value.Date + timeSpan);
+                //var field = editObject.GetType().GetProperty(nameOfField);
+                //field.SetValue(editObject, dateTimePicker1.Value.Date + timeSpan);
+                //db.SaveChanges();
+                OwnerOfThisForm.UpdateCellInDataGrid(nameOfField, dateTimePicker1.Value.Date + timeSpan);
             }
             else 
             {
-                var field = editObject.GetType().GetProperty(nameOfField);
-                field.SetValue(editObject, Convert.ChangeType(textBox1.Text, typeOfCell));
-                db.SaveChanges();
-                OwnerOfThisForm.UpdateCellInDataGrid(rowIndex, nameOfField, Convert.ChangeType(textBox1.Text, typeOfCell));
+                //var field = editObject.GetType().GetProperty(nameOfField);
+                //field.SetValue(editObject, Convert.ChangeType(textBox1.Text, typeOfCell));
+                //db.SaveChanges();
+                OwnerOfThisForm.UpdateCellInDataGrid(nameOfField, Convert.ChangeType(textBox1.Text, typeOfCell));
             }
             Close();
         }

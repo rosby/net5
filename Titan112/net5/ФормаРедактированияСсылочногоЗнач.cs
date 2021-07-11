@@ -52,13 +52,13 @@ namespace net5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var OwnerOfThisForm = Owner as ФормаСпискаПоля;
+            var OwnerOfThisForm = Owner as ФормаОбъектаDB;
             var index = dataGridView1.CurrentRow.Index;
 
             var field = editObject.GetType().GetProperty(nameOfField);
             field.SetValue(editObject, table.Rows[index]["0"]);
             db.SaveChanges();
-            OwnerOfThisForm.UpdateCellInDataGrid(rowIndex, nameOfField, table.Rows[index]["0"]);
+            OwnerOfThisForm.UpdateCellInDataGrid(nameOfField, table.Rows[index]["0"]);
 
             Close();
 
